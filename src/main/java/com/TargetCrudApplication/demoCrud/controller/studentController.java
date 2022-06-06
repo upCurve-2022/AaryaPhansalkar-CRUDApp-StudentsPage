@@ -18,7 +18,7 @@ public class studentController
     //----------------------------POST(Create)-------------------------------------//
     //PostMappings written for API
     //This is for Adding new mentor API
-    @PostMapping("/addstudent")
+    /*@PostMapping("/addstudent")
     public studentModel addStudent(@RequestBody studentModel mentor)
     {
         return service.saveNewStudent(mentor);
@@ -27,12 +27,16 @@ public class studentController
     public List<studentModel> addStudents(@RequestBody List<studentModel> mentors)
     {
         return service.saveAllNewStudents(mentors);
+    }*/
+    @PostMapping("/savestudent")
+    public String saveEmployee(@ModelAttribute("studentModel") studentModel model) {
+        service.saveNewStudent(model);
+        return "redirect:/";
     }
 
 
-
     //---------------------------GET(Read)-------------------------------------//
-    @GetMapping("/getstudents")
+    /*@GetMapping("/getstudents")
     public List<studentModel> findAllStudents()
     {
         return service.getDetails();
@@ -42,21 +46,31 @@ public class studentController
     {
         return service.getDetailsById(studentId);
 
+    }*/
+    @GetMapping("/")
+    public ModelAndView viewHomePage()
+    {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("listStudents", service.getDetails());
+        modelAndView.setViewName("index");
+        return modelAndView;
     }
 
-    //@GetMapping("/mentor/{mentorName}")       //If name not mentioned as part of request url, 404 error occurs
-    //public  mentorDetails findMentorByName(@PathVariable String mentorName)
-    //{
-    //To use any input as part of url request @path variable annotation is used
-    //    return service.getDetailsByName(mentorName);
-    //}
+    @GetMapping("/showNewStudentForm")
+    public ModelAndView showNewStudentForm()
+    {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("studentModel", new studentModel());
+        modelAndView.setViewName("showNewStudentForm");
+        return modelAndView;
+    }
 
 
     //-------------------------------PUT(Update)-----------------------------------//
     @PutMapping("/updatestudent")
-    public studentModel updateStudent(@RequestBody studentModel mentor)
+    public studentModel updateStudent(@RequestBody studentModel student)
     {
-        return service.saveNewStudent(mentor);
+        return service.saveNewStudent(student);
     }
 
 
