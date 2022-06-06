@@ -1,10 +1,10 @@
 # AaryaPhansalkar-CRUDApp-StudentsPage
 
 
-Backend Code for CRUD Application using Springboot and MySQL database
+CRUD Application using Springboot, MySQL database and Thymeleaf dependency
 
 
-Contains typical classes -
+Contains typical classes for backend -
 1)Entity
 2)Repository
 3)Controller
